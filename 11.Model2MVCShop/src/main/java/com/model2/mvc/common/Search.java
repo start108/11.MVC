@@ -1,5 +1,6 @@
 package com.model2.mvc.common;
 
+import java.util.Date;
 
 //==>리스트화면을 모델링(추상화/캡슐화)한 Bean 
 public class Search {
@@ -15,7 +16,25 @@ public class Search {
 	//==> 참조
 	private int endRowNum;
 	private int startRowNum;
+	private int priceDetail;
+	private String currentRegDate;
 	
+	public String getCurrentRegDate() {
+		return currentRegDate;
+	}
+
+	public void setCurrentRegDate(String curretRegDate) {
+		this.currentRegDate = curretRegDate;
+	}
+
+	public int getPriceDetail() {
+		return priceDetail;
+	}
+
+	public void setPriceDetail(int priceDetail) {
+		this.priceDetail = priceDetail;
+	}
+
 	///Constructor
 	public Search() {
 	}

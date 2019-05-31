@@ -207,9 +207,10 @@
 			  <td align="left">${user.userName}</td>
 			  <td align="left">${user.email}</td>
 			  <td align="left">
-			  	<i class="glyphicon glyphicon-ok" id= "${user.userId}"></i>
+			  	<i class="glyphicon glyphicon-search" id= "${user.userId}"></i>
 			  	<input type="hidden" value="${user.userId}">
 			  </td>
+			 
 			</tr>
           <tr>
 		<td id="${user.userId}" colspan="8" bgcolor=#F0F0F0 height="1"></td>

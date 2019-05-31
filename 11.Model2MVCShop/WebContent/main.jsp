@@ -49,22 +49,23 @@
        Main jumbotron for a primary marketing message or call to action
       <div class="jumbotron">-->
       <div class="container">
-  		<div class="neon">귀동냥.. </div>
-  <div class="flux">눈동냥.... </div>
-</div>
+  		 <div class="neon">귀동냥 눈동냥 </div> 
+  		
+  		<!-- <div class="flux">눈동냥.... </div> -->
+ 		</div>
       	<h1></h1>
         <p></p>
   
 
 	<!-- 참조 : http://getbootstrap.com/css/   : container part..... -->
-	<div class="container">
+	<!-- <div class="container">
         <h3>진영이는 이렇게 말했다.</h3>
         <p>"선택하는 사람이 되라고..."</p>
-  	 	<!-- <h3>"... 장벽은 절실하게 원하지 않는 사람들을 걸러내려고 존재합니다. 장벽은. 당신이 아니라 '다른' 사람들을 멈추게 하려고 거기 있는 것이지요."</h3>-->
+  		<h3>"... 장벽은 절실하게 원하지 않는 사람들을 걸러내려고 존재합니다. 장벽은. 당신이 아니라 '다른' 사람들을 멈추게 하려고 거기 있는 것이지요."</h3>
          <h3>그 이후</h3>
          <p>귀동냥 눈동냥 하는 것은 건강에 좋지 않다고 말하였다.</p>
          
-  	 </div>
+  	 </div> --> 
 
 </body>
 

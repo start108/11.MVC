@@ -51,20 +51,17 @@
 		}
 		
 		
-		//============= "검색"  Event  처리 =============	
-		 $(function() {
-			 //==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
-			 //$( "button.btn.btn-default" ).on("click" , function() {
-			//	fncGetUserList(1);
-			//});
-		 });
 		
 		
 		//============= userId 에 회원정보보기  Event  처리(Click) =============	
 		 $(function() {
 		
+		$( "button.btn.btn-info:contains('최신 상품')" ).on("click" , function() {
+			$("#currentRegDate").val("0");
+			fncGetList("1");
+		});
 			//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
-			$( ".ct_list_pop td:nth-child(2)" ).on("click",function(){//dblclick
+			$( "td:nth-child(2)" ).on("click",function(){//dblclick
 				self.location = "/product/getProduct?prodNo="+$(this).children('#prodNo').text().trim()+"&menu=${param.search}";
 			});
 			
@@ -73,10 +70,10 @@
 			});
 						
 			//==> userId LINK Event End User 에게 보일수 있도록 
-			$( "td:nth-child(2)" ).css("color" , "black");
+			$( "td:nth-child(n)" ).css("color" , "black");//.ct_list_pop:nth-child(n)
 			$("h7").css("color" , "red");
 			
-			$(".ct_list_pop:nth-child(n)").on("mouseenter", function(){
+			$("tr:nth-child(n)").on("mouseenter", function(){
 				$(this).css({
 					"background-color":"#808080",
 					"font-weight":"bolder"
@@ -98,9 +95,10 @@
 		 $(function() {
 			 
 			//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
-			$(  "td:nth-child(5)>i" ).on("click" , function() {
+			$("span[class='glyphicon glyphicon-search']").on("click" , function() {
 
-				var prodNo = $(this).children('#prodNo').text().trim();
+				var prodNo = $(this).attr("id").trim();
+				
 				
 					$.ajax( 
 							{
@@ -124,13 +122,53 @@
 									$( "#"+prodNo+"" ).html(displayValue);
 								}
 						});
+				
 						////////////////////////////////////////////////////////////////////////////////////////////
 					
 			});
 			
+			$("a[href='#']:contains('가격 전체')").on("click",function(){
+				
+				$("#priceDetail").val("0");
+				fncGetList("1");
+				
+			});
 			
-			//==> 아래와 같이 정의한 이유는 ??
-			//$(".ct_list_pop:nth-child(4n+6)" ).css("background-color" , "yellow");//whitesmoke
+			$("a[href='#']:contains('10만원 이하')").on("click",function(){
+				
+				$("#priceDetail").val("1");
+				fncGetList("1");
+				
+			});
+			
+			$("a[href='#']:contains('10만원~20만원')").on("click",function(){
+				
+				$("#priceDetail").val("2");
+				fncGetList("1");
+				
+			});
+			
+			$("a[href='#']:contains('20만원~30만원')").on("click",function(){
+				
+				$("#priceDetail").val("3");
+				fncGetList("1");
+				
+			});
+			
+			$("a[href='#']:contains('30만원~40만원')").on("click",function(){
+	
+				$("#priceDetail").val("4");
+				fncGetList("1");
+	
+			});
+
+			$("a[href='#']:contains('50만원 이상')").on("click",function(){
+	
+				$("#priceDetail").val("5");
+				fncGetList("1");
+	
+			});
+			
 		});	
 	
 	</script>
@@ -159,9 +197,32 @@
 		    	</p>
 		    </div>
 		    
+		    <!-- <button type="button" class="btn btn-default">높은 가격순</button>
+		    <button type="button" class="btn btn-default">낮은 가격순</button>
+		    <button type="button" class="btn btn-default">수량 조회</button> -->
+		    
+		    
 		    <div class="col-md-6 text-right">
 			    <form class="form-inline" name="detailForm">
-			    
+			    	
+			    	      <a  href="#" class="dropdown-toggle" data-toggle="dropdown" role="btn btn-default" aria-expanded="false">
+	        				<span class="btn btn-default">맞춤 가격</span>
+	        			
+	                     </a>
+	                     <ul class="dropdown-menu">
+	                     	 <li><a href="#">가격 전체</a></li>
+	                         <li><a href="#">10만원 이하</a></li>   
+	                       	 <li><a href="#">20만원~30만원</a></li>
+	                       	 <li><a href="#">30만원~40만원</a></li>
+	                       	 <li><a href="#">40만원~50만원</a></li>
+	                       	 <li><a href="#">50만원 이상</a></li>
+	          
+	                     </ul>
+	            	
+			    	<button type="button" class="btn btn-info">최신 상품</button>
+			    		
+			    	
+			    	
 				  <div class="form-group">
 				    <select class="form-control" name="searchCondition" >
 						<option value="0"  ${ ! empty search.searchCondition && search.searchCondition==0 ? "selected" : "" }>상품번호</option>
@@ -177,9 +238,14 @@
 				  
 				  <button type="button" class="btn btn-default">검색</button>
 				  
+				 
+				  
 				  <!-- PageNavigation 선택 페이지 값을 보내는 부분 -->
 				  <input type="hidden" id="currentPage" name="currentPage" value=""/>
+				  <input type="hidden" id="priceDetail" name="priceDetail" value="${! empty search.priceDetail ? search.priceDetail : '' }"/>
+				  <input type="hidden" id="currentRegDate" name="currentRegDate" value="${! empty search.currentRegDate ? search.currentRegDate : '' }"/>
 				  
+				  <!-- Field의 name과 폼 태그 안 input name을 같이하면 request 될 때 value를 바인딩 해서 보내줌 -->
 				</form>
 	    	</div>
 	    	
@@ -197,6 +263,7 @@
             <th align="left">상품등록일</th>
             <th align="left">배송상태</th>
             <th align="left">간략정보</th>
+            <th align="left">비고</th>
           </tr>
         </thead>
        
@@ -205,28 +272,33 @@
 		  <c:set var="i" value="0" />
 		  <c:forEach var="product" items="${list}">
 			<c:set var="i" value="${ i+1 }" />
-			<tr class="ct_list_pop">
+			<tr>
 			  <td align="center">${ i }</td>
 			  <td align="left"  title="Click : 상품정보 확인"> ${product.prodName}
 			  <div id="prodNo" style="display:none;">${product.prodNo}</div></td>
 			  <td align="left">${product.regDate}</td>
 			  <td align="left">${product.proTranCode}</td>
 			  <td align="left">
-			  <i class="glyphicon glyphicon-ok" id= "${product.prodNo}"></i>
-			  	<input type="hidden" value="${product.prodNo}">
+			  <span class="glyphicon glyphicon-search" id="${product.prodNo}"></span>
 			  </td> 
 			<td></td>
 			<td align="left">
 			<c:if test="${param.menu eq 'manage'}">
-			<input type="button" value="수정">
+			<input type="button" class="btn btn-warning" value="수정">
 			</c:if>
 			</td>
 			</tr>
           <tr>
-		<td id="${product.prodNo}" colspan="8" bgcolor=#F0F0F0 height="1"></td>
 		</tr>
           </c:forEach>
-        
+			<!--<c:choose>
+			<c:when test="${product.proTranCode eq '1  ' }">배송하기</c:when>
+			<c:when test="${product.proTranCode eq '2  ' }">배송중</c:when>
+			<c:when test="${product.proTranCode eq '3  ' }">물건도착</c:when>
+			<c:when test="${product.proTranCode eq '4  ' }">판매완료</c:when>
+			</c:choose>-->
+          
+
         </tbody>
       
       </table>

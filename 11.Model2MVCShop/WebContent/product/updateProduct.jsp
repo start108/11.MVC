@@ -39,25 +39,53 @@
 	<script type="text/javascript">
 	
 		//============= "수정"  Event 연결 =============
-		 $(function() {
-			//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
-			$( "button.btn.btn-primary" ).on("click" , function() {
-				fncUpdateProduct();
-			});
-		});	
+		function fncUpdateProduct() {
+	// Form 유효성 검증
+
+	var name= $("input[name='prodName']").val();
+	var detail= $("input[name='prodDetail']").val();
+	var manuDate= $("input[name='manuDate']").val();
+	var price= $("input[name='price']").val();
+	
+	if(name == null || name.length<1){
+		alert("상품명은 반드시 입력하여야 합니다.");
+		return;
+	}
+	if(detail == null || detail.length<1){
+		alert("상품상세정보는 반드시 입력하여야 합니다.");
+		return;
+	}
+	if(manuDate == null || manuDate.length<1){
+		alert("제조일자는 반드시 입력하셔야 합니다.");
+		return;
+	}
+	if(price == null || price.length<1){
+		alert("가격은 반드시 입력하셔야 합니다.");
+		return;
+	}
+	
+	$("form").attr("method" , "POST").attr("action" , "/product/updateProduct").submit();
+}//===========================================//
+//==> 추가된부분 : "수정"  Event 연결
+ $(function() {
+	//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
+	//==> 1 과 3 방법 조합 : $("tagName.className:filter함수") 사용함.	
+	 $( "button.btn.btn-primary" ).on("click" , function() {
 		
+		 fncUpdateProduct();
 		
-		//============= "취소"  Event 처리 및  연결 =============
-		$(function() {
-			//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
-			$("a[href='#' ]").on("click" , function() {
-				$("form")[0].reset();
-			});
-		});	
-		
-				
-			$("form").attr("method" , "POST").attr("action" , "/product/updateProduct").submit();
-		}
+	 });
+});
+
+$(function() {
+	//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
+	//==> 1 과 3 방법 조합 : $("tagName.className:filter함수") 사용함.	
+	 $( "a[href='#' ]" ).on("click" , function() {
+		//Debug..
+		//alert(  $( "td.ct_btn01:contains('취소')" ).html() );
+		history.go(-1);
+	});
+});
 	
 	</script>
 	
@@ -73,62 +101,65 @@
 	<div class="container">
 	
 		<div class="page-header text-center">
-	       <h3 class=" text-info">판매상품수정</h3>
-	       <h5 class="text-muted">수정 <strong class="text-danger">제대로</strong>해 주세요.</h5>
+	       <h3 class=" text-info">상품정보수정</h3>
+	       <!-- <h5 class="text-muted">내 정보를 <strong class="text-danger">최신정보로 관리</strong>해 주세요.</h5> -->
 	    </div>
 	    
 	    <!-- form Start /////////////////////////////////////-->
 		<form class="form-horizontal">
 		
 		  <div class="form-group">
-		    <label for="ProdNo" class="col-sm-offset-1 col-sm-3 control-label">상품 번호</label>
+		    <label for="prodNo" class="col-sm-offset-1 col-sm-3 control-label">상품 번호</label>
 		    <div class="col-sm-4">
-		      <input type="text" class="form-control" id="ProdNo" name="ProdNo" value="${product.ProdNo}">
+		      <input type="text" class="form-control" id="prodNo" name="prodNo" value="${product.prodNo }" placeholder="수정 불가합니다"  readonly>
 		       <span id="helpBlock" class="help-block">
 		      	<strong class="text-danger">상품번호 수정불가</strong>
 		      </span>
 		    </div>
 		  </div>
+		  
+		  <div class="form-group">
+		    <label for="regDate" class="col-sm-offset-1 col-sm-3 control-label">등록일자</label>
+		    <div class="col-sm-4">
+		      <input type="text" class="form-control" id="regDate" name="regDate" value="${product.regDate }" placeholder="수정 불가합니다"  readonly>
+		       <span id="helpBlock" class="help-block">
+		      	<strong class="text-danger">등록일자 수정불가</strong>
+		      </span>
+		    </div>
+		  </div>
 		
 		  <div class="form-group">
-		    <label for="password" class="col-sm-offset-1 col-sm-3 control-label">상품명</label>
+		    <label for="prodName" class="col-sm-offset-1 col-sm-3 control-label">상품명</label>
 		    <div class="col-sm-4">
-		      <input type="password" class="form-control" id="password" name="password"  value="${product.ProdName}">
+		      <input type="prodName" class="form-control" id="prodName" name="prodName" value="${product.prodName }">
 		    </div>
 		  </div>
 		  
 		  <div class="form-group">
-		    <label for="userName" class="col-sm-offset-1 col-sm-3 control-label">상품이미지</label>
+		    <label for="prodDetail" class="col-sm-offset-1 col-sm-3 control-label">상품상세정보</label>
 		    <div class="col-sm-4">
-		      <input type="text" class="form-control" id="userName" name="userName" value="${user.userName}" placeholder="변경회원이름">
+		      <input type="text" class="form-control" id="prodDetail" name="prodDetail" value="${product.prodDetail}">
 		    </div>
 		  </div>
 		  
 		  <div class="form-group">
-		    <label for="ssn" class="col-sm-offset-1 col-sm-3 control-label">상품 상세정보</label>
+		    <label for="ssn" class="col-sm-offset-1 col-sm-3 control-label">제조일자</label>
 		    <div class="col-sm-4">
-		      <input type="text" class="form-control" id="addr" name="addr"  value="${user.addr}" placeholder="변경주소">
+		      <input type="text" class="form-control" id="manuDate" name="manuDate"  value="${product.manuDate}">
 		    </div>
 		  </div>
 		  
 		   <div class="form-group">
-		    <label for="ssn" class="col-sm-offset-1 col-sm-3 control-label">제조일자</label>
-		    <div class="col-sm-4">
-		      <input type="text" class="form-control" id="email" name="email" value="${user.email}" placeholder="변경이메일">
-		    </div>
-		  </div>
-		  
-		  <div class="form-group">
 		    <label for="ssn" class="col-sm-offset-1 col-sm-3 control-label">가격</label>
 		    <div class="col-sm-4">
-		      <input type="text" class="form-control" id="email" name="email" value="${user.email}" placeholder="변경이메일">
+		      <input type="text" class="form-control" id="price" name="price" value="${product.price}">
 		    </div>
 		  </div>
 		  
 		  <div class="form-group">
-		    <label for="ssn" class="col-sm-offset-1 col-sm-3 control-label">등록일자</label>
+		    <label for="fileName" class="col-sm-offset-1 col-sm-3 control-label">상품 이미지</label>
 		    <div class="col-sm-4">
-		      <input type="text" class="form-control" id="email" name="email" value="${user.email}" placeholder="변경이메일">
+		       <input type="file" multiple="multiple" class="form-control" id="fileName" name="fileName" value="" placeholder="file input...">
 		    </div>
 		  </div>
 		  

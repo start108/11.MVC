@@ -115,7 +115,7 @@
 	
 		<div class="page-header text-center">
 	       <h3 class=" text-info">판매상품등록</h3>
-	       <h5 class="text-muted">판매상품 <strong class="text-danger">빨리</strong>좀요 .</h5>
+	       <h5 class="text-muted">판매상품 <strong class="text-danger">등록</strong> 창입니다.</h5>
 	    </div>
 	    
 	    <!-- form Start /////////////////////////////////////-->
@@ -134,7 +134,7 @@
 		  <div class="form-group">
 		    <label for="prodDetail" class="col-sm-offset-1 col-sm-3 control-label">상품상세정보</label>
 		    <div class="col-sm-4">
-		      <input type="prodDetail" class="form-control" id="prodDetail" name="prodDetail" placeholder="성의있게 써주세요.">
+		      <input type="prodDetail" class="form-control" id="prodDetail" name="prodDetail" >
 		    </div>
 		  </div>
 		  

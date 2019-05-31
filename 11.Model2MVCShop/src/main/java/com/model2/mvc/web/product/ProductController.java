@@ -116,7 +116,16 @@ public class ProductController {
 		//Business Logic
 		
 		productService.updateProduct(product);
-	
+		
+		DecimalFormat formatter = new DecimalFormat("###,###");
+		
+		int price = product.getPrice();
+		String priceformat = formatter.format(price);
+		System.out.println("pf///////"+priceformat);
+		
+		model.addAttribute("priceformat", priceformat);
+		model.addAttribute("product", product);
+		
 		return "forward:/product/getProduct.jsp?menu=manage";
 	}
 	
@@ -135,7 +144,7 @@ public class ProductController {
 	
 	
 	@RequestMapping(value="listProduct")
-	public String listUser( @ModelAttribute("search") Search search , Model model , HttpServletRequest request) throws Exception{
+	public String listUser( @ModelAttribute("search") Search search , Model model , HttpServletRequest request, Product product) throws Exception{
 		
 		System.out.println("/product/listProduct: GET/ POST");
 		
@@ -155,12 +164,12 @@ public class ProductController {
 		model.addAttribute("resultPage", resultPage);
 		model.addAttribute("search", search);
 		
-		
 		return "forward:/product/listProduct.jsp";
 	}
-	
-	@RequestMapping(value="postProudct")
-	public String postProduct() throws Exception{
-		return "forward:/product/postProduct.jsp";
-	}
 }
+//	
+//	@RequestMapping(value="postProudct")
+//	public String postProduct() throws Exception{
+//		return "forward:/product/postProduct.jsp";
+//	}
+//}

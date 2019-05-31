@@ -58,8 +58,42 @@
 										 				prod_no = #{searchKeyword}
 													</if>
 													<if test="searchCondition == 1 and searchKeyword !='' ">
-										 				LOWER(prod_name) LIKE LOWER('%'|| #{searchKeyword}||'%') 
+										 				and LOWER(prod_name) LIKE LOWER('%'|| #{searchKeyword}||'%') 
 													</if>
+												<if	test="priceDetail != null">
+													<if test="priceDetail == 0">
+														and price &gt; 0
+													</if>
+													
+													<if test="priceDetail == 1">
+														and price &lt; 100000
+													</if>
+													
+													<if test="priceDetail == 2">
+														and price between 100000 and 200000
+														<!-- and price &gt;= 20000 and price &lt; 40000 -->
+													</if>
+													
+													<if test="priceDetail == 3">
+														and price between 200000 and 300000
+														
+													</if>
+													
+													<if test="priceDetail == 4">
+														and price between 300000 and 400000
+														
+													</if>
+													
+													<if test="priceDetail == 5">
+														and price &gt;= 500000
+														
+													</if>
+												</if>	
+													<if	test="currentRegDate != null">
+														<if test="currentRegDate == 0">
+														and reg_date > SYSDATE-7
+														</if>
+												   </if>
 												</where>
 											</if>
 											ORDER BY prod_no ) inner_table
@@ -90,6 +124,40 @@
 													<if test="searchCondition == 1 and searchKeyword !='' ">
 										 				LOWER(prod_name) LIKE LOWER('%'|| #{searchKeyword}||'%') 
 													</if>
+												<if	test="priceDetail != null">
+													<if test="priceDetail == 0">
+														and price &gt; 0
+													</if>
+													
+													<if test="priceDetail == 1">
+														and price &lt; 100000
+													</if>
+													
+													<if test="priceDetail == 2">
+														and price between 100000 and 200000
+														<!-- and price &gt;= 20000 and price &lt; 40000 -->
+													</if>
+													
+													<if test="priceDetail == 3">
+														and price between 200000 and 300000
+														
+													</if>
+													
+													<if test="priceDetail == 4">
+														and price between 300000 and 400000
+														
+													</if>
+													
+													<if test="priceDetail == 5">
+														and price &gt;= 500000
+														
+													</if>
+												</if>	
+													<if	test="currentRegDate != null">
+														<if test="currentRegDate == 0">
+														and reg_date > SYSDATE-7
+														</if>
+												   </if>
 												</where>
 											</if>) countTable						
 	 </select>

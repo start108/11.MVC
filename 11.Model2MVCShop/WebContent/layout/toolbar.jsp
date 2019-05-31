@@ -10,8 +10,10 @@
 	
 	<div class="container">
 	       
-		<a class="navbar-brand" href="/index.jsp">蓖悼成..传悼成..</a>
+		 <a class="navbar-brand" href="/index.jsp">喊端喊</a>
 		
+		<!--  <div class="neon">蓖悼成.. </div>
+  		<div class="flux">传悼成.... </div>-->
 		<!-- toolBar Button Start //////////////////////// -->
 		<div class="navbar-header">
 		    <button class="navbar-toggle collapsed" data-toggle="collapse" data-target="#target">

@@ -39,14 +39,14 @@
 		 $(function() {
 			
 			 $( "button.btn btn-primary" ).on("click" , function() {
-				 self.location ="/product/getProduct?prodNo="+$("#prodNo").text().trim()+"&menu=${param.menu}";
+				 history.go(-1);
 				});
 		});
 		
 		 $(function() {
 				
 				$("a[href='#' ]").on("click" , function() {
-					history.go(-1);
+					self.location ="/product/addProductView";
 				});
 			});	
 	</script>
@@ -61,7 +61,7 @@
 	
 		<div class="page-header">
 	       <h3 class=" text-info">판매상품등록</h3>
-	       <h5 class="text-muted">빨리 <strong class="text-danger">좀</strong>등록하세요.</h5>
+	       <!--<h5 class="text-muted">빨리 <strong class="text-danger">좀</strong>등록하세요.</h5>  -->
 	    </div>
 	
 		<div class="row">

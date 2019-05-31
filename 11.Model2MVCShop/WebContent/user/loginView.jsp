@@ -73,7 +73,7 @@
 	<!-- ToolBar Start /////////////////////////////////////-->
 	<div class="navbar  navbar-default">
         <div class="container">
-        	<a class="navbar-brand" href="/index.jsp">±Íµ¿³É ´«µ¿³É</a>
+        	<a class="navbar-brand" href="/index.jsp"></a>
    		</div>
    	</div>
    	<!-- ToolBar End /////////////////////////////////////-->	
